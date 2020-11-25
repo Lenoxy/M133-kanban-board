@@ -5,7 +5,7 @@ In diesem Projekt haben wir gemäss Auftrag auf Sharepoint ein Kanban-Board impl
 Für das Frontend sowie das Backend wird derselbe Server benutzt.
 Dieser kann von Root aus wiefolgt gestartet werden:
 
-```deno run --allow-net backend/main.ts```
+```deno run --allow-net --allow-read backend/main.ts```
 
 Die Webseite ist dann auf [localhost:8000](http://localhost:8000/) erreichbar.
 
