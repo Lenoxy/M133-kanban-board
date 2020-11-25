@@ -1,7 +1,29 @@
-POST http://localhost:8000/
+GET http://localhost:8000/api/
+Accept: application/json
+
+###
+POST http://localhost:8000/api/
 Content-Type: application/json
 
 {
-  "id": 999,
-  "value": "content"
+  "id": "db12826f-3584-4d87-bdc8-42bd05a8daf1",
+  "state": 2,
+  "content": "todo item"
+}
+
+###
+PUT http://localhost:8000/api/
+Content-Type: application/json
+
+{
+  "state": 0,
+  "content": "todo item98"
+}
+
+###
+DELETE http://localhost:8000/api/
+Content-Type: application/json
+
+{
+  "id": "0afaffc2-1474-4235-aee4-9b1dcba7200c"
 }

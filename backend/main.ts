@@ -8,19 +8,43 @@ const router = new Router();
 let boardItems: ItemDto[] = [];
 
 router
-    .put('/add', async (context) => {
+    .put('/api/', async (context) => {
         const body = await context.request.body().value
         body.id = v4.generate();
-        console.log(body)
         boardItems.push(body);
+        context.response.status = 201;
+    })
+    .get('/api/', async (context) => {
+        context.response.body = boardItems;
+        context.response.status = 200;
+    })
+    .post('/api/', async (context) => {
+        const body: ItemDto = await context.request.body().value;
+        let savedItem = boardItems.find((item) => {
+            return item.id === body.id
+        })
+        if (savedItem) {
+            savedItem.state = body.state;
+            context.response.status = 200;
+        } else {
+            context.response.status = 400;
+        }
+
+    })
+    .delete('/api/', async (context) => {
+        const body: ItemDto = await context.request.body().value;
+        let savedItem = boardItems.findIndex((item) => {
+            return item.id === body.id
+        })
+        if(savedItem != undefined){
+            boardItems.splice(savedItem, 1);
+            context.response.status = 200;
+        }else {
+            context.response.status = 400;
+        }
     })
     .get('/', async (context) => {
-        context.response.body = boardItems;
+        // TODO: return frontend
     })
-    .post('/', async (context) => {
-        const body = await context.request.body().value
-        console.log(body)
-})
-
 app.use(router.routes());
 app.listen({port: 8000});
