@@ -1,80 +1,92 @@
 * {
-  margin: 0;
-  padding: 0;
-  border: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-  width: 98%;
-  height: 98%;
-  padding: 1%;
+    width: 98%;
+    height: 98%;
+    padding: 1%;
 }
 
-.title {
-  width: 100%;
-  height: 24px;
-  display: flex;
-  flex-direction: row;
-  background-color:tan;
-  
+#board-header {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    background-color: lightblue;
+
+    padding: 10px;
+
 }
 
-.title > div {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  
+#board-header > div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+
 }
 
-.btns {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color: tan;
-  border-bottom: 5px solid white;
+#board-header > div > button {
+    width: 50px;
 }
 
-.btns > div {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
+.col-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: tan;
+    border-bottom: 5px solid white;
 }
 
-.btns > div > button {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  margin: 2px
+.col-header > div {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
 }
 
-.board {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color: yellow;
+.col-header > div > button {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin: 2px
 }
 
-.board > div {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
+#board {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    background-color: lightgreen;
+    padding: 10px;
 }
 
-.row1, .row2, .row3 {
-  flex-direction: column;
-  padding: 2px;
+
+.row > div {
+    width: 98%;
+    text-align: center;
+    margin: 5px;
 }
 
-.row1 > div, .row2 > div, .row3 > div {
-  width: 98%;
-  text-align: center;
+.nav-btn {
+    border-radius: 3px;
+    margin: 5px;
+    padding: 4px;
 }
 
-.btnRight, .btnLeft{
-  border-radius: 3px;
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.card{
-  display: flex;
-  flex-direction: row;
+.row{
+    width: 33.3%;
+    display: flex;
+    flex-direction: column;
 }

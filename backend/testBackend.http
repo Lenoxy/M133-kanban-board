@@ -6,9 +6,8 @@ POST http://localhost:8000/api/
 Content-Type: application/json
 
 {
-  "id": "db12826f-3584-4d87-bdc8-42bd05a8daf1",
-  "state": 2,
-  "content": "todo item"
+  "id": "72bc8a4c-db84-4444-8877-50f25f120f47",
+  "state": 1
 }
 
 ###
@@ -16,7 +15,7 @@ PUT http://localhost:8000/api/
 Content-Type: application/json
 
 {
-  "state": 0,
+  "state": 2,
   "content": "todo item98"
 }
 
