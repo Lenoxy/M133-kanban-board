@@ -36,7 +36,7 @@ router
 
     })
     .put('/api/', async (context) => {
-        const body: ItemDto = await context.request.body().value;
+        const body: ItemDto = JSON.parse(await context.request.body().value);
         body.id = v4.generate();
         boardItems.push(body);
         context.response.status = 201;
@@ -46,8 +46,8 @@ router
         context.response.status = 200;
     })
     .post('/api/', async (context) => {
-        let body = await context.request.body().value;
-        body = JSON.parse(body);
+        let body = JSON.parse(await context.request.body().value);
+
         let savedItem = boardItems.find((item) => item.id === body.id);
         if (savedItem) {
             savedItem.state = body.state;
