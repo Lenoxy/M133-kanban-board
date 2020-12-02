@@ -58,12 +58,13 @@ router
 
     })
     .delete('/api/', async (context) => {
-        const body: ItemDto = await context.request.body().value;
-        let savedItem = boardItems.findIndex((item) => {
+        const answer: string = await context.request.body().value;
+        const body: ItemDto = JSON.parse(answer);
+        let savedItemIndex: number = boardItems.findIndex((item) => {
             return item.id === body.id
         })
-        if (savedItem != undefined) {
-            boardItems.splice(savedItem, 1);
+        if (savedItemIndex > -1) {
+            boardItems.splice(savedItemIndex, 1);
             context.response.status = 200;
         } else {
             context.response.status = 400;
