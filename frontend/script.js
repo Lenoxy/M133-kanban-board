@@ -5,7 +5,7 @@ let numberOfColumns = null;
 async function getItems() {
     const rows = document.getElementsByClassName('row')
 
-    for(let row of rows){
+    for (let row of rows) {
         row.innerHTML = '';
     }
 
@@ -38,9 +38,9 @@ async function getItems() {
         itemEl.appendChild(rightButtonEl);
 
         let columnToAppendToEl = document.querySelector('#column-' + itemObj.state)
-        if(columnToAppendToEl){
+        if (columnToAppendToEl) {
             columnToAppendToEl.appendChild(itemEl);
-        }else {
+        } else {
             console.error('Could not find desired column #column-' + itemObj.state);
         }
     }
@@ -74,31 +74,49 @@ async function initializeHeader() {
 
 }
 
-async function moveItem(itemId, preferredColumnNumber) {
-    if(preferredColumnNumber >= numberOfColumns || preferredColumnNumber < 0){
+
+async function addItem(columnId){
+    let userInput = prompt('Please enter a title for the new item')
+    if(userInput){
+        await fetch(
+            'http://localhost:8000/api/',
+            {
+                method: 'PUT',
+                body: JSON.stringify({
+                    "id": null,
+                    "state": columnId,
+                    "content": userInput,
+                })
+            }
+        )
+        await getItems();
+    }else {
+        alert('Please enter a valid input. Item was not created.')
+    }
+}
+
+async function moveItem(itemId, preferredColumnId) {
+    if (preferredColumnId >= numberOfColumns || preferredColumnId < 0) {
         return;
     }
 
-    console.log(itemId, preferredColumnNumber);
-    const response = await fetch(
+    await fetch(
         'http://localhost:8000/api/',
         {
             method: 'POST',
             body: JSON.stringify({
                 "id": itemId,
-                "state": preferredColumnNumber
+                "state": preferredColumnId
             })
         }
     )
-    console.log(response)
     await getItems();
 }
 
-async function addItem(columnNumber) {
-    //TODO
-    console.log(columnNumber)
+// Extra function due to me hating .then()
+async function initialize(){
+    await initializeHeader();
+    await getItems();
 }
 
-
-initializeHeader()
-getItems();
+initialize();
