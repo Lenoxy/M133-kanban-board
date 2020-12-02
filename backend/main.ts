@@ -9,32 +9,32 @@ let boardItems: ItemDto[] = [];
 
 router
     .get('/', async (context) => {
-        context.response.body =  await Deno.readTextFile("frontend/index.html");
+        context.response.body = await Deno.readTextFile("frontend/index.html");
     })
     .get('/style.css', async (context) => {
         context.response.type = 'text/css';
-        context.response.body =  await Deno.readTextFile("frontend/style.css");
+        context.response.body = await Deno.readTextFile("frontend/style.css");
     })
     .get('/script.js', async (context) => {
         context.response.type = 'application/javascript';
-        context.response.body =  await Deno.readTextFile("frontend/script.js");
-    }).get('/api/columns', (context)=>{
-        context.response.body = [
-            {
-                name: 'ToDo',
-                statusKey: 0,
-            },
-            {
-                name: 'Actual',
-                statusKey: 1,
-            },
-            {
-                name: 'Done',
-                statusKey: 2,
-            }
-        ]
+        context.response.body = await Deno.readTextFile("frontend/script.js");
+    }).get('/api/columns', (context) => {
+    context.response.body = [
+        {
+            name: 'ToDo',
+            statusKey: 0,
+        },
+        {
+            name: 'Actual',
+            statusKey: 1,
+        },
+        {
+            name: 'Done',
+            statusKey: 2,
+        }
+    ]
 
-    })
+})
     .put('/api/', async (context) => {
         const body: ItemDto = JSON.parse(await context.request.body().value);
         body.id = v4.generate();
@@ -62,10 +62,10 @@ router
         let savedItem = boardItems.findIndex((item) => {
             return item.id === body.id
         })
-        if(savedItem != undefined){
+        if (savedItem != undefined) {
             boardItems.splice(savedItem, 1);
             context.response.status = 200;
-        }else {
+        } else {
             context.response.status = 400;
         }
     })
