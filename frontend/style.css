@@ -5,33 +5,35 @@
 }
 
 body {
-    width: 98%;
-    height: 98%;
-    padding: 1%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 #board-header {
-    width: 100%;
-    height: 40px;
     display: flex;
     flex-direction: row;
     background-color: lightblue;
-
-    padding: 10px;
-
+    font-size: x-large;
+    font-weight: 500;
 }
 
 #board-header > div {
+    flex: 1 1 33.3%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
+    border-left: 5px solid black;
 }
 
 #board-header > div > button {
-    width: 50px;
+    width: 60px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: xx-large;
 }
 
 .col-header {
@@ -39,7 +41,6 @@ body {
     display: flex;
     flex-direction: row;
     background-color: tan;
-    border-bottom: 5px solid white;
 }
 
 .col-header > div {
@@ -56,13 +57,15 @@ body {
 }
 
 #board {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-
     background-color: lightgreen;
-    padding: 10px;
+}
+
+#board > div {
+    flex: 1 1 33.3%;
+    border-left: 5px solid black;
 }
 
 
@@ -70,12 +73,15 @@ body {
     width: 98%;
     text-align: center;
     margin: 5px;
+    background-color: palegoldenrod;
+    border-radius: 10px;
 }
 
 .nav-btn {
     border-radius: 3px;
     margin: 5px;
     padding: 4px;
+    font-size: x-large;
 }
 
 .card {
@@ -86,7 +92,6 @@ body {
 }
 
 .row{
-    width: 33.3%;
     display: flex;
     flex-direction: column;
 }
