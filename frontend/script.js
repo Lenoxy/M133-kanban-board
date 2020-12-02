@@ -16,6 +16,8 @@ async function getItems() {
 
         let itemEl = document.createElement('div')
         itemEl.className = 'card';
+        itemEl.draggable = true;
+        itemEl.id = itemObj.id;
 
         let leftButtonEl = document.createElement('button');
         leftButtonEl.addEventListener('click', () => {
@@ -33,6 +35,7 @@ async function getItems() {
         rightButtonEl.addEventListener('click', () => {
             moveItem(itemObj.id, itemObj.state + 1)
         })
+
         rightButtonEl.className = 'nav-btn';
         rightButtonEl.innerText = '>'
         itemEl.appendChild(rightButtonEl);
@@ -71,6 +74,35 @@ async function initializeHeader() {
         column.id = 'column-' + columnObj.statusKey
         boardEl.appendChild(column);
     }
+
+    var cardEl = null;
+    var targetColumn = null;
+    document.addEventListener('dragstart', (event)=>{
+        cardEl = event.target;
+    });
+
+    document.addEventListener('dragover', (event)=>{
+        event.preventDefault();
+    });
+
+    document.addEventListener('drop', async (event)=>{
+        event.preventDefault();
+        let parentNode = event.target
+        while(parentNode){
+            if(parentNode.className && parentNode.className.includes('row')){
+                targetColumn = parentNode;
+                break;
+            }
+            parentNode = parentNode.parentNode;
+        }
+        if(targetColumn){
+            let desiredColumnId = targetColumn.id.substr(targetColumn.id.length -1)
+            console.log(cardEl.id)
+            console.log(desiredColumnId);
+            moveItem(cardEl.id, desiredColumnId);
+        }
+
+    });
 
 }
 
