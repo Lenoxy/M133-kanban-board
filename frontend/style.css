@@ -36,6 +36,10 @@ body {
     font-size: xx-large;
 }
 
+img{
+    width: 20px;
+}
+
 .col-header {
     width: 100%;
     display: flex;
