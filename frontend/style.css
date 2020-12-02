@@ -70,7 +70,7 @@ img{
 }
 
 
-.row > div {
+.content-column > div {
     width: 98%;
     text-align: center;
     margin: 5px;
@@ -89,7 +89,7 @@ img{
     align-items: center;
 }
 
-.row{
+.content-column{
     width: 33.3%;
     display: flex;
     flex-direction: column;

@@ -4,15 +4,14 @@ const boardEl = document.querySelector('#board')
 const boardHeaderEl = document.querySelector('#board-header');
 let numberOfColumns = null;
 
-async function getItems() {
-    const rows = document.getElementsByClassName('row')
+async function insertItems() {
+    const contentColumns = document.getElementsByClassName('content-column')
 
-    for (let row of rows) {
-        row.innerHTML = '';
+    for (let contentColumn of contentColumns) {
+        contentColumn.innerHTML = '';
     }
 
-    let response = await fetch('http://localhost:8000/api/', {method: 'GET'});
-    let items = await response.json()
+    const items = await getItems();
 
     for (let itemObj of items) {
 
@@ -43,7 +42,7 @@ async function getItems() {
 
 
         let deleteImgEl = document.createElement('img')
-        deleteImgEl.addEventListener('click', ()=>{
+        deleteImgEl.addEventListener('click', () => {
             deleteItem(itemObj.id);
         })
         deleteImgEl.src = DELETE_IMAGE_BASE64;
@@ -80,39 +79,48 @@ async function initializeHeader() {
 
         // Build Table
         let column = document.createElement('div');
-        column.className = 'row';
+        column.className = 'content-column';
         column.id = 'column-' + columnObj.statusKey
         boardEl.appendChild(column);
     }
 
     var cardEl = null;
     var targetColumn = null;
-    document.addEventListener('dragstart', (event)=>{
+    document.addEventListener('dragstart', (event) => {
         cardEl = event.target;
     });
 
-    document.addEventListener('dragover', (event)=>{
+    document.addEventListener('dragover', (event) => {
         event.preventDefault();
     });
 
-    document.addEventListener('drop', async (event)=>{
+    document.addEventListener('drop', async (event) => {
         event.preventDefault();
         let parentNode = event.target
-        while(parentNode != undefined){
-            if(parentNode.className && parentNode.id.includes('column-')){
+        while (parentNode != undefined) {
+            if (parentNode.className && parentNode.id.includes('column-')) {
                 targetColumn = parentNode;
                 break;
             }
             parentNode = parentNode.parentNode;
         }
-        if(targetColumn){
-            let desiredColumnId = parseInt(targetColumn.id.substr(targetColumn.id.length -1));
+        if (targetColumn) {
+            let desiredColumnId = parseInt(targetColumn.id.substr(targetColumn.id.length - 1));
             moveItem(cardEl.id, desiredColumnId);
         }
     });
 }
 
-async function deleteItem(itemId){
+async function getItems() {
+    const response = await fetch(
+        'http://localhost:8000/api/',
+        {
+            method: 'GET'
+        });
+    return await response.json()
+}
+
+async function deleteItem(itemId) {
     await fetch(
         'http://localhost:8000/api/',
         {
@@ -124,12 +132,12 @@ async function deleteItem(itemId){
             })
         }
     )
-    await getItems();
+    await insertItems();
 }
 
-async function addItem(columnId){
+async function addItem(columnId) {
     let userInput = prompt('Please enter a title for the new item')
-    if(userInput){
+    if (userInput) {
         await fetch(
             'http://localhost:8000/api/',
             {
@@ -141,8 +149,8 @@ async function addItem(columnId){
                 })
             }
         )
-        await getItems();
-    }else {
+        await insertItems();
+    } else {
         alert('Please enter a valid input. Item was not created.')
     }
 }
@@ -162,13 +170,14 @@ async function moveItem(itemId, preferredColumnId) {
             })
         }
     )
-    await getItems();
+    await insertItems();
 }
 
 // Extra function due to me hating .then()
-async function initialize(){
+async function initialize() {
     await initializeHeader();
-    await getItems();
+    await insertItems();
 }
 
 initialize();
+
