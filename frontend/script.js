@@ -20,17 +20,20 @@ async function insertItems() {
         itemEl.draggable = true;
         itemEl.id = itemObj.id;
 
+        let textEl = document.createElement('p');
+        textEl.innerText = itemObj.content;
+        itemEl.appendChild(textEl);
+
+        let controlDivEl = document.createElement('div')
+        controlDivEl.className = 'control-div'
+
         let leftButtonEl = document.createElement('button');
         leftButtonEl.className = 'nav-btn';
         leftButtonEl.innerText = '<'
         leftButtonEl.addEventListener('click', () => {
             moveItem(itemObj.id, itemObj.state - 1)
         })
-        itemEl.appendChild(leftButtonEl);
-
-        let textEl = document.createElement('p');
-        textEl.innerText = itemObj.content;
-        itemEl.appendChild(textEl);
+        controlDivEl.appendChild(leftButtonEl);
 
         let rightButtonEl = document.createElement('button')
         rightButtonEl.className = 'nav-btn';
@@ -38,16 +41,19 @@ async function insertItems() {
         rightButtonEl.addEventListener('click', () => {
             moveItem(itemObj.id, itemObj.state + 1)
         })
-        itemEl.appendChild(rightButtonEl);
+        controlDivEl.appendChild(rightButtonEl);
 
 
         let deleteImgEl = document.createElement('img')
+        deleteImgEl.src = DELETE_IMAGE_BASE64;
+        // Some browsers allowing to drag images per default
+        deleteImgEl.draggable = false;
         deleteImgEl.addEventListener('click', () => {
             deleteItem(itemObj.id);
         })
-        deleteImgEl.src = DELETE_IMAGE_BASE64;
+        controlDivEl.appendChild(deleteImgEl);
 
-        itemEl.appendChild(deleteImgEl);
+        itemEl.appendChild(controlDivEl);
 
         let columnToAppendToEl = document.querySelector('#column-' + itemObj.state)
         if (columnToAppendToEl) {
@@ -84,8 +90,8 @@ async function initializeHeader() {
         boardEl.appendChild(column);
     }
 
-    var cardEl = null;
-    var targetColumn = null;
+    let cardEl = null;
+    let targetColumnEl = null;
     document.addEventListener('dragstart', (event) => {
         cardEl = event.target;
     });
@@ -99,13 +105,13 @@ async function initializeHeader() {
         let parentNode = event.target
         while (parentNode != undefined) {
             if (parentNode.className && parentNode.id.includes('column-')) {
-                targetColumn = parentNode;
+                targetColumnEl = parentNode;
                 break;
             }
             parentNode = parentNode.parentNode;
         }
-        if (targetColumn) {
-            let desiredColumnId = parseInt(targetColumn.id.substr(targetColumn.id.length - 1));
+        if (targetColumnEl) {
+            let desiredColumnId = parseInt(targetColumnEl.id.substr(targetColumnEl.id.length - 1));
             moveItem(cardEl.id, desiredColumnId);
         }
     });
