@@ -4,10 +4,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
+
+html {
+    height: 98%;
+}
+
 body {
+    height: 98%;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
 }
 
 #board-header {
@@ -22,10 +26,13 @@ body {
     flex: 1 1 33.3%;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     align-items: center;
     justify-content: space-between;
-    border-left: 5px solid black;
+    border-left: 5px solid royalblue;
+}
+
+#board-header > div:last-child {
+    border-right: 5px solid royalblue;
 }
 
 #board-header > div > button {
@@ -36,6 +43,12 @@ body {
     font-size: xx-large;
 }
 
+#spacer{
+    width: 100%;
+    height: 10px;
+    background-color: white;
+}
+
 img{
     width: 20px;
 }
@@ -44,12 +57,10 @@ img{
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: tan;
 }
 
 .col-header > div {
     display: flex;
-    flex-grow: 1;
     justify-content: center;
 }
 
@@ -64,21 +75,25 @@ img{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: lightgreen;
+    background-color: lightblue;
+    height: 90%;
 }
 
-#board > div {
-    flex: 1 1 33.3%;
-    border-left: 5px solid black;
-}
 
+#board > div:last-child {
+    border-right: 5px solid royalblue;
+}
 
 .content-column > div {
     width: 98%;
     text-align: center;
     margin: 5px;
-    background-color: palegoldenrod;
+    background-color: yellow;
     border-radius: 10px;
+}
+
+#column-2 > div {
+    background-color: greenyellow;
 }
 
 .nav-btn {
@@ -95,7 +110,14 @@ img{
     align-items: center;
 }
 
+.card > p {
+    width: 80%;
+    word-wrap: normal;
+}
+
 .content-column{
+    flex: 1 1 33.3%;
+    border-left: 5px solid royalblue;
     display: flex;
     flex-direction: column;
 }
