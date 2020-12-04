@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -20,6 +19,7 @@ body {
     flex-direction: row;
     font-size: x-large;
     font-weight: 500;
+    background-color: lightblue;
 }
 
 #board-header > div {
@@ -50,7 +50,8 @@ body {
 }
 
 img {
-    width: 20px;
+    width: 30px;
+    margin-left: 20px;
 }
 
 .col-header {
@@ -78,7 +79,6 @@ img {
 }
 
 .content-column > .card {
-    width: 95%;
     text-align: center;
     margin: 5px;
     background-color: yellow;
@@ -87,22 +87,24 @@ img {
     flex-direction: column;
 }
 
+.content-column > .card > p {
+    margin-top: 10px;
+}
+
 #column-2 > div {
     background-color: greenyellow;
 }
 
 .nav-btn {
+    width: 30px;
+    height: 30px;
     border-radius: 3px;
-    margin: 5px;
+    margin: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
-
-.card > p {
-    width: 80%;
-    word-wrap: normal;
+    font-size: x-large;
 }
 
 .content-column {
@@ -110,4 +112,12 @@ img {
     border-left: 5px solid royalblue;
     display: flex;
     flex-direction: column;
+}
+
+.card > .control-div {
+    margin: 5px;
+    padding: 4px;
+    font-size: x-large;
+    display:flex;
+    justify-content: center;
 }
